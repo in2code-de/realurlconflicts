@@ -1,0 +1,30 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:Be.Container
+        enableClickMenu="false"
+        loadExtJs="false"
+        loadExtJsTheme="false"
+        enableExtJsDebug="false"
+        loadJQuery="true"
+        jQueryNamespace="defaultNoConflict"
+        pageTitle="realurlconflicts">
+
+    <div class="module">
+        <div class="module-docheader">
+            <div class="typo3-docheader-functions">
+                <div class="module-docheader-bar module-docheader-bar-navigation">
+                    <div class="module-docheader-bar-column-left"></div>
+                    <div class="module-docheader-bar-column-right">
+                        <f:be.pagePath />
+                    </div>
+                </div>
+            </div>
+            <div class="module-docheader-bar module-docheader-bar-buttons">
+                <div class="module-docheader-bar-column-left"></div>
+                <div class="module-docheader-bar-column-right"><f:be.buttons.shortcut /></div>
+            </div>
+        </div>
+        <div class="module-body powermail-backend">
+            <f:render section="Content" />
+        </div>
+    </div>
+</f:Be.Container>

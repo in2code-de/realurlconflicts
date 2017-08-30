@@ -47,9 +47,11 @@ class RealUrlRepository
     }
 
     /**
+     * Find all entries
+     *
      * @return array
      */
-    public function findAll(): array
+    protected function findAll(): array
     {
         $result = $this->queryBuilder
             ->select('uid', 'page_id', 'pagepath')

@@ -3,8 +3,18 @@
 
 <f:section name="Content">
 
+    <f:if condition="{records}">
+        <f:then><f:render section="Records" arguments="{_all}" /></f:then>
+        <f:else><f:render section="NoRecords" arguments="{_all}" /></f:else>
+    </f:if>
+
+</f:section>
+
+
+
+<f:section name="Records">
     <div class="bg-danger ruc-note-container">
-        <h3>Vorsicht: 95 Konflikte gefunden!</h3>
+        <h3>Vorsicht: {records -> f:count()} Konflikte gefunden!</h3>
         <p>
             Bitte beachten Sie, dass ein Löschen der URL-Daten einen Konflikt nicht bzw. nur temporär beheben kann.<br />
             Diese Einträge werden automatisch bei jedem Aufruf einer (in relation stehenden) Seite im Frontend erstellt.<br />
@@ -23,37 +33,50 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>95</th>
+                    <th>{records -> f:count()}</th>
                     <th>Pfade mit Konflikten</th>
                     <th>Betroffene Seiten</th>
                     <th>Verwaltung</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><strong>1.</strong></td>
-                    <td>hochschule/studium</td>
-                    <td>
-                        <div>
-                            <span title="ID=123">
-                                <core:icon identifier="apps-pagetree-page-default" />
-                            </span>
-                            Studium (PID 123 | hochschule/studium)
-                        </div>
-                        <div>
-                            <span title="ID=123">
-                                <core:icon identifier="apps-pagetree-page-default" />
-                            </span>
-                            Studium (PID 123 | hochschule/studium)
-                        </div>
-                    </td>
-                    <td>
-                        <a href="#"><core:icon identifier="actions-document-view" /></a>
-                        <a href="#"><core:icon identifier="actions-page-open" /></a>
-                        <a href="#"><core:icon identifier="actions-delete" /></a>
-                    </td>
-                </tr>
+                <f:for each="{records}" as="record" key="path" iteration="i">
+                    <tr>
+                        <td><strong>{i.cycle}.</strong></td>
+                        <td>{path}</td>
+                        <td>
+                            <f:for each="{record}" as="pid">
+                                <div>
+                                    <span title="ID={pid}">
+                                        <core:icon identifier="apps-pagetree-page-default" />
+                                    </span>
+                                    Studium (PID {pid} | hochschule/studium)
+                                </div>
+                            </f:for>
+                        </td>
+                        <td>
+                            <f:for each="{record}" as="pid">
+                                <div>
+                                    <a href="#"><core:icon identifier="actions-document-view" /></a>
+                                    <a href="#"><core:icon identifier="actions-page-open" /></a>
+                                    <a href="#"><core:icon identifier="actions-delete" /></a>
+                                </div>
+                            </f:for>
+                        </td>
+                    </tr>
+                </f:for>
             </tbody>
         </table>
+    </div>
+</f:section>
+
+
+
+<f:section name="NoRecords">
+    <div class="bg-info ruc-note-container">
+        <h3>Keine Konflikte gefunden</h3>
+        <p>
+            Es gibt aktuell keinen Handlungsbedarf.
+        </p>
     </div>
 </f:section>

@@ -17,6 +17,6 @@ class ModuleController extends ActionController
     {
         $realurlRepository = $this->objectManager->get(RealUrlRepository::class);
         $records = $realurlRepository->findAllDuplicates();
-        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($records, 'in2code: ' . __CLASS__ . ':' . __LINE__);
+        $this->view->assign('records', $records);
     }
 }

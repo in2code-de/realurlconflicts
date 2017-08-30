@@ -1,0 +1,17 @@
+{
+  "name": "realurlconflicts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "in2code.de",
+  "license": "GPL2",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-plumber": "*",
+    "gulp-rename": "*",
+    "gulp-sass": "*"
+  }
+}

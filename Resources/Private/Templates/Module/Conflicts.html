@@ -3,23 +3,23 @@
 
 <f:section name="Content">
 
-    <div class="bg-danger">
-        <h3 style="padding: 15px 15px 0 15px">Vorsicht: 95 Konflikte gefunden!</h3>
-        <p style="padding: 0 15px 15px 15px">
+    <div class="bg-danger ruc-note-container">
+        <h3>Vorsicht: 95 Konflikte gefunden!</h3>
+        <p>
             Bitte beachten Sie, dass ein Löschen der URL-Daten einen Konflikt nicht bzw. nur temporär beheben kann.<br />
             Diese Einträge werden automatisch bei jedem Aufruf einer (in relation stehenden) Seite im Frontend erstellt.<br />
             Um Konflikte nachhaltig zu lösen, müssen gleichlautende Seiten manuell verschoben oder umbenannt werden.
         </p>
     </div>
 
-    <div>
+    <div class="ruc-button">
         <a href="#" class="btn btn-default pull-right">
             <core:icon identifier="actions-delete" />
             Konflikte mit gelöschten Seiten automatisch lösen
         </a>
     </div>
 
-    <div style="margin: 50px 0 0 0;">
+    <div class="ruc-table">
         <table class="table">
             <thead>
                 <tr>
@@ -31,9 +31,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td style="vertical-align: top;"><strong>1.</strong></td>
-                    <td style="vertical-align: top;">hochschule/studium</td>
-                    <td style="vertical-align: top;">
+                    <td><strong>1.</strong></td>
+                    <td>hochschule/studium</td>
+                    <td>
                         <div>
                             <span title="ID=123">
                                 <core:icon identifier="apps-pagetree-page-default" />
@@ -47,7 +47,7 @@
                             Studium (PID 123 | hochschule/studium)
                         </div>
                     </td>
-                    <td style="vertical-align: top;">
+                    <td>
                         <a href="#"><core:icon identifier="actions-document-view" /></a>
                         <a href="#"><core:icon identifier="actions-page-open" /></a>
                         <a href="#"><core:icon identifier="actions-delete" /></a>

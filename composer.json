@@ -1,0 +1,26 @@
+{
+  "name": "in2code/realurlconflicts",
+  "description": "Show realurlconflicts of pages in a backend module",
+  "keywords": ["typo3", "form", "mailform", "spamprevention"],
+  "homepage": "https://github.com/einpraegsam/realurlconflicts",
+  "authors": [
+    {
+      "name": "Alex Kellner",
+      "email": "alexander.kellner@in2code.de"
+    }
+  ],
+  "type": "typo3-cms-extension",
+  "license": "GPL-3.0",
+  "require": {
+    "typo3/cms": ">=7.6.0 <9.0.0"
+  },
+  "replace": {
+    "realurlconflicts": "self.version",
+    "typo3-ter/realurlconflicts": "self.version"
+  },
+  "autoload": {
+    "psr-4": {
+      "In2code\\Realurlconflicts\\": "Classes/"
+    }
+  }
+}

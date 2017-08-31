@@ -16,6 +16,13 @@ make this task even harder for editors.
 
 <img src="https://s.nimbus.everhelper.me/attachment/1092708/eqyez9ps0lkavbmwgfhq/262407-H63IiNYwUikHpBbU/screen.png" />
 
+## Requirements
+
+| Software    | Versions   |
+| ----------- | ---------- |
+| TYPO3       | 8.7        |
+| PHP         | 7.0 - 7.x  |
+
 ## Changelog
 
 | Version    | Date       | State      | Description                                                                  |

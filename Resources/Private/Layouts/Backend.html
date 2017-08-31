@@ -14,10 +14,10 @@
             <div class="typo3-docheader-functions">
                 <div class="module-docheader-bar module-docheader-bar-navigation">
                     <div class="module-docheader-bar-column-left">
-                        Role:
+                        <f:translate key="role.0">Role:</f:translate>
                         <ruc:condition.isAdministrator>
-                            <f:then>Administrator</f:then>
-                            <f:else>Editor</f:else>
+                            <f:then><strong><f:translate key="role.1">Admin</f:translate></strong></f:then>
+                            <f:else><strong><f:translate key="role.2">Editor</f:translate></strong></f:else>
                         </ruc:condition.isAdministrator>
                     </div>
                     <div class="module-docheader-bar-column-right">

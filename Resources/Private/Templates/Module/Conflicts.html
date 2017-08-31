@@ -20,13 +20,13 @@
     <f:if condition="{pid} > 0">
         <div>
             <p>
-                Liste aller Konflikte beginnend mit Seite:
+                <f:translate key="deeplinkInformation.0">Start with page:</f:translate>
                 <strong><span title="ID={pid}"><ruc:repository.getPagePropertyFromUid uid="{pid}" propertyName="title" /></span></strong>
             </p>
             <ruc:condition.isAdministrator>
                 <p>
                     <f:link.action additionalParams="{id:0}" class="btn btn-primary">
-                        Zeige alle Konflikte
+                        <f:translate key="deeplinkInformation.1">Show all</f:translate>
                     </f:link.action>
                 </p>
             </ruc:condition.isAdministrator>
@@ -38,18 +38,18 @@
 
 <f:section name="Records">
     <div class="bg-danger ruc-note-container">
-        <h3>Vorsicht: {paths -> f:count()} Konflikte gefunden!</h3>
+        <h3><f:translate key="noteContainer.0" arguments="{0:'{paths -> f:count()}'}">Conflicts found!</f:translate></h3>
         <p>
-            Bitte beachten Sie, dass ein Löschen der URL-Daten einen Konflikt nicht bzw. nur temporär beheben kann.<br />
-            Diese Einträge werden automatisch bei jedem Aufruf einer (in relation stehenden) Seite im Frontend erstellt.<br />
-            Um Konflikte nachhaltig zu lösen, müssen gleichlautende Seiten manuell verschoben oder umbenannt werden.
+            <f:translate key="noteContainer.1">Please be aware.</f:translate><br />
+            <f:translate key="noteContainer.2">Caching entries will be regenerated in frontend.</f:translate><br />
+            <f:translate key="noteContainer.3">Solve conflicts by renaming pages.</f:translate>
         </p>
     </div>
 
     <div class="ruc-button">
         <a href="#" class="btn btn-default pull-right">
             <core:icon identifier="actions-delete" />
-            Konflikte mit gelöschten Seiten automatisch lösen
+            <f:translate key="link.solveDeltedConflicts">Solve conflicts with deleted pages</f:translate>
         </a>
     </div>
 
@@ -58,9 +58,9 @@
             <thead>
                 <tr>
                     <th>{paths -> f:count()}</th>
-                    <th>Pfade mit Konflikten</th>
-                    <th>Betroffene Seiten</th>
-                    <th>Verwaltung</th>
+                    <th><f:translate key="title.paths">Paths</f:translate></th>
+                    <th><f:translate key="title.pages">Pages</f:translate></th>
+                    <th><f:translate key="title.management">Management</f:translate></th>
                 </tr>
             </thead>
             <tbody>
@@ -91,13 +91,13 @@
                                     <f:if condition="{page.uid} > 0">
                                         <f:then>
                                             <f:if condition="{page.deleted} == 0">
-                                                <ruc:link.page pid="{page.uid}" title="Seite ansehen"><core:icon identifier="actions-document-view" /></ruc:link.page>
-                                                <ruc:link.editPage pid="{page.uid}" title="Seite zum Bearbeiten öffnen"><core:icon identifier="actions-page-open" /></ruc:link.editPage>
+                                                <ruc:link.page pid="{page.uid}" title="{f:translate(key:'title.showPage')}"><core:icon identifier="actions-document-view" /></ruc:link.page>
+                                                <ruc:link.editPage pid="{page.uid}" title="{f:translate(key:'title.editPage')}"><core:icon identifier="actions-page-open" /></ruc:link.editPage>
                                             </f:if>
                                             <f:link.action
                                                     action="deleteCache"
                                                     arguments="{path:path,pid:page.uid}"
-                                                    title="Realurl caching Einträge löschen"><core:icon identifier="actions-delete" /></f:link.action>
+                                                    title="{f:translate(key:'title.deleteCache')}"><core:icon identifier="actions-delete" /></f:link.action>
                                         </f:then>
                                         <f:else>
                                             <br />
@@ -117,9 +117,9 @@
 
 <f:section name="NoRecords">
     <div class="bg-info ruc-note-container">
-        <h3>Keine Konflikte gefunden</h3>
+        <h3><f:translate key="noteContainer.4">No conflicts</f:translate></h3>
         <p>
-            Es gibt aktuell keinen Handlungsbedarf.
+            <f:translate key="noteContainer.5">Nothing to do</f:translate>
         </p>
     </div>
 </f:section>

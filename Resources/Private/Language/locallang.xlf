@@ -3,6 +3,65 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2017-08-02T12:00:00Z" product-name="realurlconflicts">
 		<header/>
 		<body>
+			<trans-unit id="role.0">
+				<source>Role:</source>
+			</trans-unit>
+			<trans-unit id="role.1">
+				<source>Administrator</source>
+			</trans-unit>
+			<trans-unit id="role.2">
+				<source>Editor</source>
+			</trans-unit>
+
+			<trans-unit id="noteContainer.0">
+				<source>Attention: %s conflict(s) found!</source>
+			</trans-unit>
+			<trans-unit id="noteContainer.1">
+				<source>Please be aware that deleting a cache may does not solve the conflict on a long view.</source>
+			</trans-unit>
+			<trans-unit id="noteContainer.2">
+				<source>Caching entries will be (re-)generated automaticly on page visits in frontend.</source>
+			</trans-unit>
+			<trans-unit id="noteContainer.3">
+				<source>To really solve a conflict, you normally have to move or rename pages.</source>
+			</trans-unit>
+			<trans-unit id="noteContainer.4">
+				<source>No conflicts found</source>
+			</trans-unit>
+			<trans-unit id="noteContainer.5">
+				<source>There is nothing to do for you.</source>
+			</trans-unit>
+
+			<trans-unit id="link.solveDeltedConflicts">
+				<source>Solve all conflicts that are related to deleted pages</source>
+			</trans-unit>
+
+			<trans-unit id="title.paths">
+				<source>Paths with conflicts</source>
+			</trans-unit>
+			<trans-unit id="title.pages">
+				<source>On pages</source>
+			</trans-unit>
+			<trans-unit id="title.management">
+				<source>Management</source>
+			</trans-unit>
+			<trans-unit id="title.showPage">
+				<source>Show page in frontend</source>
+			</trans-unit>
+			<trans-unit id="title.editPage">
+				<source>Edit page</source>
+			</trans-unit>
+			<trans-unit id="title.deleteCache">
+				<source>Delete realurl caches from this page</source>
+			</trans-unit>
+
+			<trans-unit id="deeplinkInformation.0">
+				<source>Show all conflicts within page (and subpages):</source>
+			</trans-unit>
+			<trans-unit id="deeplinkInformation.1">
+				<source>Show all conflicts</source>
+			</trans-unit>
+
 			<trans-unit id="action.deleteCache">
 				<source>Cache with path "%s" on page with uid "%s" successfully deleted</source>
 			</trans-unit>

@@ -19,7 +19,7 @@ class BackendUtility extends BackendUtilityCore
      */
     public static function getPagePropertiesFromUid(int $uid): array
     {
-        return (array)self::getRecord('pages', $uid, '*');
+        return (array)self::getRecord('pages', $uid, '*', '', false);
     }
 
     /**

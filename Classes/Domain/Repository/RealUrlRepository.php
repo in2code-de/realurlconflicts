@@ -28,6 +28,7 @@ class RealUrlRepository
     {
         $this->queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_realurl_pathdata');
+        $this->queryBuilder->getRestrictions()->removeAll();
     }
 
     /**
@@ -73,6 +74,58 @@ class RealUrlRepository
             )
             ->execute();
         return $affectedRows > 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCachingEntriesFromDeletedPages(): bool
+    {
+        $records = $this->findAllWithDeletedPages();
+        return count($records) > 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function deleteWithDeletedPages(): bool
+    {
+        $uids = $this->findAllWithDeletedPages();
+        $affectedRows = $this->queryBuilder
+            ->delete('tx_realurl_pathdata')
+            ->where(
+                $this->queryBuilder->expr()->in('uid', $uids)
+            )
+            ->execute();
+        return $affectedRows > 0;
+    }
+
+    /**
+     * Get array with tx_realurl_pathdata.uid with a relation to a deleted page
+     *
+     * @return array
+     */
+    protected function findAllWithDeletedPages(): array
+    {
+        $result = $this->queryBuilder
+            ->select('pd.uid', 'pd.page_id', 'pd.pagepath')
+            ->from('tx_realurl_pathdata', 'pd')
+            ->join(
+                'pd',
+                'pages',
+                'p',
+                'p.uid = pd.page_id'
+            )
+            ->where('pd.pagepath != "" and p.deleted=1')
+            ->setMaxResults(10000)
+            ->groupBy('pd.page_id')
+            ->execute();
+        $rows = $result->fetchAll();
+        $uids = [];
+        foreach ($rows as $row) {
+            $uids[] = $row['uid'];
+        }
+        return $uids;
     }
 
     /**

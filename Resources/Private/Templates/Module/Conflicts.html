@@ -46,12 +46,16 @@
         </p>
     </div>
 
-    <div class="ruc-button">
-        <a href="#" class="btn btn-default pull-right">
-            <core:icon identifier="actions-delete" />
-            <f:translate key="link.solveDeltedConflicts">Solve conflicts with deleted pages</f:translate>
-        </a>
-    </div>
+    <f:if condition="{hasCachingEntriesFromDeletedPages}">
+        <ruc:condition.isAdministrator>
+            <div class="ruc-button">
+                <f:link.action action="deleteCacheWithDeletedPages" class="btn btn-warning pull-right">
+                    <core:icon identifier="actions-delete" />
+                    <f:translate key="link.solveDeltedConflicts">Solve conflicts with deleted pages</f:translate>
+                </f:link.action>
+            </div>
+        </ruc:condition.isAdministrator>
+    </f:if>
 
     <div class="ruc-table">
         <table class="table">

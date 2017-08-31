@@ -19,14 +19,16 @@ class ModuleController extends ActionController
     protected $realurlRepository = null;
 
     /**
+     * List of all conflicts
+     *
      * @return void
      */
     public function conflictsAction()
     {
-        $paths = $this->realurlRepository->findAllDuplicates($this->getPid());
         $this->view->assignMultiple([
-            'paths' => $paths,
-            'pid' => $this->getPid()
+            'paths' => $this->realurlRepository->findAllDuplicates($this->getPid()),
+            'pid' => $this->getPid(),
+            'hasCachingEntriesFromDeletedPages' => $this->realurlRepository->hasCachingEntriesFromDeletedPages()
         ]);
     }
 
@@ -39,6 +41,16 @@ class ModuleController extends ActionController
     {
         $this->realurlRepository->deleteByPathAndPid($path, $pid);
         $this->addFlashMessage(LocalizationUtility::translate('action.deleteCache', 'Realurlconflicts', [$path, $pid]));
+        $this->redirect('conflicts');
+    }
+
+    /**
+     * @return void
+     */
+    public function deleteCacheWithDeletedPagesAction()
+    {
+        $this->realurlRepository->deleteWithDeletedPages();
+        $this->addFlashMessage(LocalizationUtility::translate('action.deleteCacheDeletedPages', 'Realurlconflicts'));
         $this->redirect('conflicts');
     }
 

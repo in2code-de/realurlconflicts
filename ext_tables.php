@@ -14,7 +14,7 @@ call_user_func(function () {
         'm1',
         '',
         array(
-            'Module' => 'conflicts,deleteCache'
+            'Module' => 'conflicts,deleteCache,deleteCacheWithDeletedPages'
         ),
         array(
             'access' => 'user,group',

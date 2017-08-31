@@ -42,8 +42,8 @@
 			</trans-unit>
 
 			<trans-unit id="link.solveDeltedConflicts">
-				<source>Solve all conflicts that are related to deleted pages</source>
-				<target state="translated">Konflikte mit gelöschten Seiten automatisch lösen</target>
+				<source>Clear all realurlcaches with deleted pages</source>
+				<target state="translated">Alle realurl caches mit gelöschten Seiten löschen</target>
 			</trans-unit>
 
 			<trans-unit id="title.paths">
@@ -83,6 +83,10 @@
 			<trans-unit id="action.deleteCache">
 				<source>Cache with path "%s" on page with uid "%s" successfully deleted</source>
 				<target state="translated">Cache mit Pfad "%s" auf Seite mit der uid "%s" erfolgreich gelöscht</target>
+			</trans-unit>
+			<trans-unit id="action.deleteCacheDeletedPages">
+				<source>Removed all realurl caches that are related to deleted pages</source>
+				<target state="translated">Alle realurl caches gelöscht, die auf gelöschte Seiten gezeigt haben</target>
 			</trans-unit>
 
 			<trans-unit id="flashmessages.title">

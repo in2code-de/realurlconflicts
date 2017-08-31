@@ -1,10 +1,16 @@
 # TYPO3 Extension realurlconflicts
-Show realurl conflicts in a backend module
+
+Show realurl conflicts in a backend module. 
+There are some possibilities to delete caching entries from realurl, but the main goal of this extension is, to just
+show where the conflicts are. Solving conflicts must be done without just deleting caches. 
+To resolve a conflict, an editor should rename or move a page in backend. 
+Features in realurl like `Speaking URL path segment`, `Exclude from speaking URL` or `Override the whole page path`
+make this task even harder for editors.
 
 ## Installation
 
 * Install this extension like `composer require in2code/realurlconflicts`
-* Use the backend module
+* Just use the backend module
 
 ## Screenshots
 
@@ -14,4 +20,9 @@ Show realurl conflicts in a backend module
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
-| 1.0.0      | 2017-08-31 | Initial    | Initial release                                                              |
+| 0.1.0      | 2017-08-31 | Initial    | Initial release                                                              |
+
+## What's next
+
+- Testing
+- Also look at tx_realurl_urldata and not only tx_realurl_pathdata

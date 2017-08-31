@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace In2code\Realurlconflicts\Domain\Repository;
 
 use In2code\Realurlconflicts\Utility\ArrayUtility;
+use In2code\Realurlconflicts\Utility\BackendUtility;
 use In2code\Realurlconflicts\Utility\ObjectUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -32,9 +33,15 @@ class RealUrlRepository
     /**
      * Find all duplicates
      *      [
-     *       'path' => [123, 133],
-     *       'path2' => [22, 334]
-     *      ]
+     *         'path' => [
+     *            ['uid' => 123],
+     *            ['uid' => 133]
+     *         ],
+     *         'path2' => [
+     *            ['uid' => 22],
+     *            ['uid' => 334]
+     *        ]
+     *     ]
      *
      * @param int $startPid
      * @return array
@@ -47,6 +54,7 @@ class RealUrlRepository
             $paths[$row['pagepath']][] = $row['page_id'];
         }
         $paths = ArrayUtility::filterArrayOnlyMultipleValues($paths);
+        $paths = $this->enrichPageIdentifiersWithRecord($paths);
         return $paths;
     }
 
@@ -65,6 +73,20 @@ class RealUrlRepository
             ->execute();
         $rows = $result->fetchAll();
         return $rows;
+    }
+
+    /**
+     * @param array $paths
+     * @return array
+     */
+    protected function enrichPageIdentifiersWithRecord(array $paths): array
+    {
+        foreach ($paths as $path => $uids) {
+            foreach ($uids as $key => $uid) {
+                $paths[$path][$key] = BackendUtility::getPagePropertiesFromUid($uid);
+            }
+        }
+        return $paths;
     }
 
     /**

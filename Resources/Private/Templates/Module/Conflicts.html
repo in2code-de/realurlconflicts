@@ -2,10 +2,12 @@
 {namespace core=TYPO3\CMS\Core\ViewHelpers}
 <f:layout name="Backend" />
 
+
+
 <f:section name="Content">
     <f:render section="DeeplinkInformation" arguments="{_all}" />
 
-    <f:if condition="{records}">
+    <f:if condition="{paths}">
         <f:then><f:render section="Records" arguments="{_all}" /></f:then>
         <f:else><f:render section="NoRecords" arguments="{_all}" /></f:else>
     </f:if>
@@ -35,7 +37,7 @@
 
 <f:section name="Records">
     <div class="bg-danger ruc-note-container">
-        <h3>Vorsicht: {records -> f:count()} Konflikte gefunden!</h3>
+        <h3>Vorsicht: {paths -> f:count()} Konflikte gefunden!</h3>
         <p>
             Bitte beachten Sie, dass ein Löschen der URL-Daten einen Konflikt nicht bzw. nur temporär beheben kann.<br />
             Diese Einträge werden automatisch bei jedem Aufruf einer (in relation stehenden) Seite im Frontend erstellt.<br />
@@ -54,29 +56,36 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>{records -> f:count()}</th>
+                    <th>{paths -> f:count()}</th>
                     <th>Pfade mit Konflikten</th>
                     <th>Betroffene Seiten</th>
                     <th>Verwaltung</th>
                 </tr>
             </thead>
             <tbody>
-                <f:for each="{records}" as="record" key="path" iteration="i">
+                <f:for each="{paths}" as="pathPages" key="path" iteration="i">
                     <tr>
                         <td><strong>{i.cycle}.</strong></td>
-                        <td>{path}</td>
                         <td>
-                            <f:for each="{record}" as="pid">
+                            <span title="{path}">
+                                <f:format.crop maxCharacters="50" append=" ...">{path}</f:format.crop>
+                            </span>
+                        </td>
+                        <td>
+                            <f:for each="{pathPages}" as="page">
                                 <div>
-                                    <span title="ID={pid}">
-                                        <core:icon identifier="apps-pagetree-page-default" />
+                                    <span title="ID={page.uid}">
+                                        <f:render partial="GetPageIconFromRecord" arguments="{page:page}" />
                                     </span>
-                                    Studium (PID {pid} | hochschule/studium)
+                                    {page.title} (PID {page.uid} |
+                                    <span title="{ruc:repository.getPathFromUid(uid:page.uid)}">
+                                        <f:format.crop maxCharacters="80" append=" ..."><ruc:repository.getPathFromUid uid="{page.uid}" /></f:format.crop>)
+                                    </span>
                                 </div>
                             </f:for>
                         </td>
                         <td>
-                            <f:for each="{record}" as="pid">
+                            <f:for each="{pathPages}" as="page">
                                 <div>
                                     <a href="#"><core:icon identifier="actions-document-view" /></a>
                                     <a href="#"><core:icon identifier="actions-page-open" /></a>

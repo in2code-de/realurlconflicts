@@ -1,0 +1,11 @@
+module.tx_realurlconflicts {
+    view {
+        templateRootPaths.0 = EXT:realurlconflicts/Resources/Private/Templates/
+        partialRootPaths.0 = EXT:realurlconflicts/Resources/Private/Partials/
+        layoutRootPaths.0 = EXT:realurlconflicts/Resources/Private/Layouts/
+    }
+    settings {
+        # Don't show this page in pagepath and stop on this page (normally the page on top with UID=1)
+        stopOnPidForPagePath = 1
+    }
+}

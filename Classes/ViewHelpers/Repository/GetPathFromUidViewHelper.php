@@ -3,13 +3,14 @@ declare(strict_types=1);
 namespace In2code\Realurlconflicts\ViewHelpers\Repository;
 
 use In2code\Realurlconflicts\Utility\BackendUtility;
+use In2code\Realurlconflicts\Utility\ConfigurationUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Class GetPagePropertyFromUidViewHelper
+ * Class GetPathFromUidViewHelper
  */
-class GetPagePropertyFromUidViewHelper extends AbstractViewHelper
+class GetPathFromUidViewHelper extends AbstractViewHelper
 {
 
     /**
@@ -19,7 +20,6 @@ class GetPagePropertyFromUidViewHelper extends AbstractViewHelper
     {
         parent::initializeArguments();
         $this->registerArgument('uid', 'int', 'Page identifier', true);
-        $this->registerArgument('propertyName', 'string', 'Page property', true);
     }
 
     /**
@@ -45,10 +45,26 @@ class GetPagePropertyFromUidViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): string {
-        $record = BackendUtility::getPagePropertiesFromUid($arguments['uid']);
-        if (array_key_exists($arguments['propertyName'], $record)) {
-            return $record[$arguments['propertyName']];
+        $stopOnPid = (int)ConfigurationUtility::getConfiguration('stopOnPidForPagePath');
+        $rootline = BackendUtility::getRootlineFromUid((int)$arguments['uid'], $stopOnPid);
+        $path = '';
+        foreach ($rootline as $pid) {
+            $path .= ' / ' . self::getPageTitleFromUid($pid);
         }
-        return '';
+        return trim($path, ' / ');
+    }
+
+    /**
+     * @param int $uid
+     * @return string
+     */
+    protected static function getPageTitleFromUid(int $uid): string
+    {
+        $title = '';
+        $properties = BackendUtility::getPagePropertiesFromUid($uid);
+        if (array_key_exists('title', $properties)) {
+            $title = $properties['title'];
+        }
+        return $title;
     }
 }

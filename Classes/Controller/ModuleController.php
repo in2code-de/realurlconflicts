@@ -18,8 +18,8 @@ class ModuleController extends ActionController
     public function conflictsAction()
     {
         $realurlRepository = $this->objectManager->get(RealUrlRepository::class);
-        $records = $realurlRepository->findAllDuplicates($this->getPid());
-        $this->view->assign('records', $records);
+        $paths = $realurlRepository->findAllDuplicates($this->getPid());
+        $this->view->assign('paths', $paths);
         $this->view->assign('pid', $this->getPid());
     }
 

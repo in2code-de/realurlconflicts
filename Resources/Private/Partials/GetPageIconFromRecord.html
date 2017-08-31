@@ -1,0 +1,15 @@
+<f:if condition="{page.deleted}">
+    <f:then>
+        <core:icon identifier="apps-pagetree-page-default" overlay="apps-pagetree-drag-place-denied" />
+    </f:then>
+    <f:else>
+        <f:if condition="{page.hidden}">
+            <f:then>
+                <core:icon identifier="apps-pagetree-page-default" overlay="overlay-hidden" />
+            </f:then>
+            <f:else>
+                <core:icon identifier="apps-pagetree-page-default" />
+            </f:else>
+        </f:if>
+    </f:else>
+</f:if>

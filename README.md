@@ -8,7 +8,7 @@ Show realurl conflicts in a backend module
 
 ## Screenshots
 
-<img src="https://s.nimbus.everhelper.me/attachment/1090040/k7yyhska6ciq61x4gplh/262407-NPTp8Xpzu51znJoJ/screen.png" />
+<img src="https://s.nimbus.everhelper.me/attachment/1092708/eqyez9ps0lkavbmwgfhq/262407-H63IiNYwUikHpBbU/screen.png" />
 
 ## Changelog
 

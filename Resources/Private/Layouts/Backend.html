@@ -1,4 +1,4 @@
-{namespace vh=In2code\Powermail\ViewHelpers}
+{namespace ruc=In2code\Realurlconflicts\ViewHelpers}
 <f:Be.Container
         includeCssFiles="{0: '{f:uri.resource(path:\'Css/Backend.min.css\')}'}"
         enableClickMenu="false"
@@ -13,7 +13,13 @@
         <div class="module-docheader">
             <div class="typo3-docheader-functions">
                 <div class="module-docheader-bar module-docheader-bar-navigation">
-                    <div class="module-docheader-bar-column-left"></div>
+                    <div class="module-docheader-bar-column-left">
+                        Role:
+                        <ruc:condition.isAdministrator>
+                            <f:then>Administrator</f:then>
+                            <f:else>Editor</f:else>
+                        </ruc:condition.isAdministrator>
+                    </div>
                     <div class="module-docheader-bar-column-right">
                         <f:be.pagePath />
                     </div>

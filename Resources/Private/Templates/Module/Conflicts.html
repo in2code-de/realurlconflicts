@@ -1,13 +1,34 @@
+{namespace ruc=In2code\Realurlconflicts\ViewHelpers}
 {namespace core=TYPO3\CMS\Core\ViewHelpers}
 <f:layout name="Backend" />
 
 <f:section name="Content">
+    <f:render section="DeeplinkInformation" arguments="{_all}" />
 
     <f:if condition="{records}">
         <f:then><f:render section="Records" arguments="{_all}" /></f:then>
         <f:else><f:render section="NoRecords" arguments="{_all}" /></f:else>
     </f:if>
+</f:section>
 
+
+
+<f:section name="DeeplinkInformation">
+    <f:if condition="{pid} > 0">
+        <div>
+            <p>
+                Liste aller Konflikte beginnend mit Seite:
+                <strong><span title="ID={pid}"><ruc:repository.getPagePropertyFromUid uid="{pid}" propertyName="title" /></span></strong>
+            </p>
+            <ruc:condition.isAdministrator>
+                <p>
+                    <f:link.action additionalParams="{id:0}" class="btn btn-primary">
+                        Zeige alle Konflikte
+                    </f:link.action>
+                </p>
+            </ruc:condition.isAdministrator>
+        </div>
+    </f:if>
 </f:section>
 
 

@@ -1,0 +1,8 @@
+<f:flashMessages as="flashMessages">
+    <div class="bg-success ruc-note-container">
+        <h3><f:translate key="flashmessages">Your messages</f:translate></h3>
+        <f:for each="{flashMessages}" as="flashMessage">
+            <p>{flashMessage.message}</p>
+        </f:for>
+    </div>
+</f:flashMessages>

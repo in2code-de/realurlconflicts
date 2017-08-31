@@ -6,6 +6,7 @@
 
 <f:section name="Content">
     <f:render section="DeeplinkInformation" arguments="{_all}" />
+    <f:render partial="flashmessages" arguments="{_all}" />
 
     <f:if condition="{paths}">
         <f:then><f:render section="Records" arguments="{_all}" /></f:then>
@@ -87,9 +88,14 @@
                         <td>
                             <f:for each="{pathPages}" as="page">
                                 <div>
-                                    <a href="#"><core:icon identifier="actions-document-view" /></a>
-                                    <a href="#"><core:icon identifier="actions-page-open" /></a>
-                                    <a href="#"><core:icon identifier="actions-delete" /></a>
+                                    <f:if condition="{page.deleted} == 0">
+                                        <ruc:link.page pid="{page.uid}" title="Seite ansehen"><core:icon identifier="actions-document-view" /></ruc:link.page>
+                                        <ruc:link.editPage pid="{page.uid}" title="Seite zum Bearbeiten öffnen"><core:icon identifier="actions-page-open" /></ruc:link.editPage>
+                                    </f:if>
+                                    <f:link.action
+                                            action="deleteCache"
+                                            arguments="{path:path,pid:page.uid}"
+                                            title="Realurl caching Einträge löschen"><core:icon identifier="actions-delete" /></f:link.action>
                                 </div>
                             </f:for>
                         </td>

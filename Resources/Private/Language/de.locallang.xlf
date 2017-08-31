@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-08-02T12:00:00Z" product-name="realurlconflicts">
+		<header/>
+		<body>
+			<trans-unit id="action.deleteCache">
+				<source>Cache with path "%s" on page with uid "%s" successfully deleted</source>
+				<target state="translated">Cache mit Pfad "%s" auf Seite mit der uid "%s" erfolgreich gelöscht</target>
+			</trans-unit>
+
+			<trans-unit id="flashmessages.title">
+				<source>Your latest messages</source>
+				<target state="translated">Aktuelle Meldungen</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

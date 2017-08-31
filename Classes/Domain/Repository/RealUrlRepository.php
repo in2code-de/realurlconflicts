@@ -59,6 +59,23 @@ class RealUrlRepository
     }
 
     /**
+     * @param string $path
+     * @param int $pid
+     * @return bool
+     */
+    public function deleteByPathAndPid(string $path, int $pid): bool
+    {
+        $affectedRows = $this->queryBuilder
+            ->delete('tx_realurl_pathdata')
+            ->where(
+                $this->queryBuilder->expr()->eq('pagepath', $this->queryBuilder->createNamedParameter($path)),
+                $this->queryBuilder->expr()->eq('page_id', $pid)
+            )
+            ->execute();
+        return $affectedRows > 0;
+    }
+
+    /**
      * @param int $startPid
      * @return array
      */

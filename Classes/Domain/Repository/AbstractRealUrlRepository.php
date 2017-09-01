@@ -99,7 +99,6 @@ abstract class AbstractRealUrlRepository
             )
             ->where('pd.' . $this->pathField . ' != "" and p.deleted=1')
             ->setMaxResults(10000)
-            ->groupBy('pd.page_id')
             ->execute();
         $rows = $result->fetchAll();
         $uids = [];

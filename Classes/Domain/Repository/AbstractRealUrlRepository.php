@@ -48,7 +48,7 @@ abstract class AbstractRealUrlRepository
             ->delete($this->tableName)
             ->where(
                 $this->queryBuilder->expr()->eq($this->pathField, $this->queryBuilder->createNamedParameter($path)),
-                $this->queryBuilder->expr()->eq($this->pathField, $pid)
+                $this->queryBuilder->expr()->eq('page_id', $pid)
             )
             ->execute();
         return $affectedRows > 0;

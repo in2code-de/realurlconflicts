@@ -2,7 +2,8 @@
 declare(strict_types=1);
 namespace In2code\Realurlconflicts\Controller;
 
-use In2code\Realurlconflicts\Domain\Repository\RealUrlRepository;
+use In2code\Realurlconflicts\Domain\Repository\RealurlPathDataRepository;
+use In2code\Realurlconflicts\Domain\Repository\RealurlUrlDataRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -14,9 +15,14 @@ class ModuleController extends ActionController
 {
 
     /**
-     * @var RealUrlRepository
+     * @var RealurlPathDataRepository
      */
-    protected $realurlRepository = null;
+    protected $realurlPathDataRepository = null;
+
+    /**
+     * @var RealurlUrlDataRepository
+     */
+    protected $realurlUrlDataRepository = null;
 
     /**
      * List of all conflicts
@@ -26,9 +32,9 @@ class ModuleController extends ActionController
     public function conflictsAction()
     {
         $this->view->assignMultiple([
-            'paths' => $this->realurlRepository->findAllDuplicates($this->getPid()),
+            'paths' => $this->realurlPathDataRepository->findAllDuplicates($this->getPid()),
             'pid' => $this->getPid(),
-            'hasCachingEntriesFromDeletedPages' => $this->realurlRepository->hasCachingEntriesFromDeletedPages()
+            'hasCachingEntriesFromDeletedPages' => $this->realurlPathDataRepository->hasCachingEntriesFromDeletedPages()
         ]);
     }
 
@@ -39,7 +45,8 @@ class ModuleController extends ActionController
      */
     public function deleteCacheAction(string $path, int $pid)
     {
-        $this->realurlRepository->deleteByPathAndPid($path, $pid);
+        $this->realurlPathDataRepository->deleteByPathAndPid($path, $pid);
+        $this->realurlUrlDataRepository->deleteByPathAndPid($path, $pid);
         $this->addFlashMessage(LocalizationUtility::translate('action.deleteCache', 'Realurlconflicts', [$path, $pid]));
         $this->redirect('conflicts');
     }
@@ -49,7 +56,8 @@ class ModuleController extends ActionController
      */
     public function deleteCacheWithDeletedPagesAction()
     {
-        $this->realurlRepository->deleteWithDeletedPages();
+        $this->realurlPathDataRepository->deleteWithDeletedPages();
+        $this->realurlUrlDataRepository->deleteWithDeletedPages();
         $this->addFlashMessage(LocalizationUtility::translate('action.deleteCacheDeletedPages', 'Realurlconflicts'));
         $this->redirect('conflicts');
     }
@@ -63,11 +71,20 @@ class ModuleController extends ActionController
     }
 
     /**
-     * @param RealUrlRepository $realurlRepository
+     * @param RealurlPathDataRepository $realurlPathDataRepository
      * @return void
      */
-    public function injectRealurlRepository(RealUrlRepository $realurlRepository)
+    public function injectRealurlPathDataRepository(RealurlPathDataRepository $realurlPathDataRepository)
     {
-        $this->realurlRepository = $realurlRepository;
+        $this->realurlPathDataRepository = $realurlPathDataRepository;
+    }
+
+    /**
+     * @param RealurlUrlDataRepository $realurlUrlDataRepository
+     * @return void
+     */
+    public function injectRealurlUrlDataRepository(RealurlUrlDataRepository $realurlUrlDataRepository)
+    {
+        $this->realurlUrlDataRepository = $realurlUrlDataRepository;
     }
 }

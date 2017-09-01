@@ -27,9 +27,5 @@ make this task even harder for editors.
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 1.0.0      | 2017-09-01 | Task       | Official release                                                             |
 | 0.1.0      | 2017-08-31 | Initial    | Initial release                                                              |
-
-## What's next
-
-- Testing
-- Also look at tx_realurl_urldata and not only tx_realurl_pathdata

@@ -1,7 +1,7 @@
 {
   "name": "in2code/realurlconflicts",
   "description": "Show realurlconflicts of pages in a backend module",
-  "keywords": ["typo3", "form", "mailform", "spamprevention"],
+  "keywords": ["realurl", "conflicts", "url", "routing"],
   "homepage": "https://github.com/einpraegsam/realurlconflicts",
   "authors": [
     {

@@ -22,6 +22,7 @@ make this task even harder for editors.
 | ----------- | ---------- |
 | TYPO3       | 8.7        |
 | PHP         | 7.0 - 7.x  |
+| Realurl     | 2.0 - 2.99 |
 
 ## Changelog
 

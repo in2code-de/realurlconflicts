@@ -17,6 +17,11 @@ class RealUrlRepository
 {
 
     /**
+     * @var string
+     */
+    protected $tableName = 'tx_realurl_pathdata';
+
+    /**
      * @var null|QueryBuilder
      */
     protected $queryBuilder = null;
@@ -27,7 +32,7 @@ class RealUrlRepository
     public function __construct()
     {
         $this->queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('tx_realurl_pathdata');
+            ->getQueryBuilderForTable($this->tableName);
         $this->queryBuilder->getRestrictions()->removeAll();
     }
 
@@ -67,7 +72,7 @@ class RealUrlRepository
     public function deleteByPathAndPid(string $path, int $pid): bool
     {
         $affectedRows = $this->queryBuilder
-            ->delete('tx_realurl_pathdata')
+            ->delete($this->tableName)
             ->where(
                 $this->queryBuilder->expr()->eq('pagepath', $this->queryBuilder->createNamedParameter($path)),
                 $this->queryBuilder->expr()->eq('page_id', $pid)
@@ -92,7 +97,7 @@ class RealUrlRepository
     {
         $uids = $this->findAllWithDeletedPages();
         $affectedRows = $this->queryBuilder
-            ->delete('tx_realurl_pathdata')
+            ->delete($this->tableName)
             ->where(
                 $this->queryBuilder->expr()->in('uid', $uids)
             )
@@ -109,7 +114,7 @@ class RealUrlRepository
     {
         $result = $this->queryBuilder
             ->select('pd.uid', 'pd.page_id', 'pd.pagepath')
-            ->from('tx_realurl_pathdata', 'pd')
+            ->from($this->tableName, 'pd')
             ->join(
                 'pd',
                 'pages',
@@ -136,7 +141,7 @@ class RealUrlRepository
     {
         $result = $this->queryBuilder
             ->select('uid', 'page_id', 'pagepath')
-            ->from('tx_realurl_pathdata')
+            ->from($this->tableName)
             ->where($this->getWhereStringForStartPid($startPid))
             ->setMaxResults(100000)
             ->groupBy('page_id')

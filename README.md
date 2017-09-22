@@ -28,6 +28,7 @@ make this task even harder for editors.
 
 | Version    | Date       | State      | Description                                                                  |
 | ---------- | ---------- | ---------- | ---------------------------------------------------------------------------- |
+| 1.0.2      | 2017-09-22 | Task       | Change extension icon                                                        |
 | 1.0.1      | 2017-09-01 | Bugfix     | Set dependencies to realurl                                                  |
 | 1.0.0      | 2017-09-01 | Task       | Official release                                                             |
 | 0.1.0      | 2017-08-31 | Initial    | Initial release                                                              |

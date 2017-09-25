@@ -32,3 +32,9 @@ make this task even harder for editors.
 | 1.0.1      | 2017-09-01 | Bugfix     | Set dependencies to realurl                                                  |
 | 1.0.0      | 2017-09-01 | Task       | Official release                                                             |
 | 0.1.0      | 2017-08-31 | Initial    | Initial release                                                              |
+
+## Todo
+
+This extension was originally build for a customer with just one rootpage. So different rootpages are supported in 
+realurl but not yet in this extension.
+BTW: Feel free to do a PR on this issue

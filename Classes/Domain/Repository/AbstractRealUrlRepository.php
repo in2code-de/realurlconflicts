@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace In2code\Realurlconflicts\Domain\Repository;
 
+use In2code\Realurlconflicts\Utility\DatabaseUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -85,26 +86,18 @@ abstract class AbstractRealUrlRepository
      * Get array with tx_realurl_pathdata.uid with a relation to a deleted page
      *
      * @return array
+     * @throws \Doctrine\DBAL\DBALException
      */
     protected function findAllWithDeletedPages(): array
     {
-        $result = $this->queryBuilder
-            ->select('pd.uid', 'pd.page_id', 'pd.' . $this->pathField)
-            ->from($this->tableName, 'pd')
-            ->join(
-                'pd',
-                'pages',
-                'p',
-                'p.uid = pd.page_id'
-            )
-            ->where('pd.' . $this->pathField . ' != "" and p.deleted=1')
+        $connection = DatabaseUtility::getConnectionForTable('pages');
+        $uidList = $connection->executeQuery('select group_concat(uid) from pages where deleted=1;')->fetchColumn(0);
+        return (array)$this->queryBuilder
+            ->select('uid')
+            ->from($this->tableName)
+            ->where('page_id in (' . $uidList . ')')
             ->setMaxResults(10000)
-            ->execute();
-        $rows = $result->fetchAll();
-        $uids = [];
-        foreach ($rows as $row) {
-            $uids[] = $row['uid'];
-        }
-        return $uids;
+            ->execute()
+            ->fetchAll(0);
     }
 }

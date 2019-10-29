@@ -69,12 +69,18 @@ abstract class AbstractRealUrlRepository
      */
     public function deleteWithDeletedPages(): bool
     {
+        $uidList = [];
         $uids = $this->findAllWithDeletedPages();
+
+        foreach ($uids as $uid) {
+            $uidList[] = implode('', $uid);
+        }
+
         if (count($uids) > 0) {
             $affectedRows = $this->queryBuilder
                 ->delete($this->tableName)
                 ->where(
-                    $this->queryBuilder->expr()->in('uid', $uids)
+                    $this->queryBuilder->expr()->in('uid', $uidList)
                 )
                 ->execute();
             return $affectedRows > 0;

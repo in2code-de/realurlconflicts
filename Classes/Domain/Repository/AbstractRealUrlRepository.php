@@ -69,12 +69,9 @@ abstract class AbstractRealUrlRepository
      */
     public function deleteWithDeletedPages(): bool
     {
-        $uidList = [];
         $uids = $this->findAllWithDeletedPages();
 
-        foreach ($uids as $uid) {
-            $uidList[] = implode('', $uid);
-        }
+        $uidList =  implode(',',array_map(function($a) {return implode('~',$a);},$uids));
 
         if (count($uids) > 0) {
             $affectedRows = $this->queryBuilder
@@ -97,12 +94,16 @@ abstract class AbstractRealUrlRepository
     protected function findAllWithDeletedPages(): array
     {
         $connection = DatabaseUtility::getConnectionForTable('pages');
-        $uidList = $connection->executeQuery('select group_concat(uid) from pages where deleted=1;')->fetchColumn(0);
+        $uids = $connection->executeQuery('select uid from pages where deleted=1;')->fetchAll();
+        
+        $uidList =  implode(',',array_map(function($a) {return implode('~',$a);},$uids));
+        
         return (array)$this->queryBuilder
             ->select('uid')
             ->from($this->tableName)
-            ->where('page_id in (' . $uidList . ')')
-            ->setMaxResults(10000)
+            ->where(
+                $this->queryBuilder->expr()->in('page_id', $uidList)
+            )
             ->execute()
             ->fetchAll(0);
     }

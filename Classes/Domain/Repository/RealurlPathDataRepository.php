@@ -58,7 +58,7 @@ class RealurlPathDataRepository extends AbstractRealUrlRepository
      */
     protected function findAllFromStartPid(int $startPid): array
     {
-        $result = $this->queryBuilder
+        $result = $this->getQueryBuilder()
             ->select('uid', 'page_id', 'pagepath')
             ->from($this->tableName)
             ->where($this->getWhereStringForStartPid($startPid))

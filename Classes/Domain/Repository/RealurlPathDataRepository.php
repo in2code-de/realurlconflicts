@@ -63,7 +63,7 @@ class RealurlPathDataRepository extends AbstractRealUrlRepository
             ->from($this->tableName)
             ->where($this->getWhereStringForStartPid($startPid))
             ->setMaxResults(100000)
-            ->groupBy('page_id')
+            ->groupBy('page_id', 'pagepath')
             ->execute();
         $rows = $result->fetchAll();
         return $rows;
